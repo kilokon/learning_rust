@@ -2,26 +2,22 @@
 
 extern crate glium;
 
-
 fn main() {
-    use glium::{ glutin, Surface };
-    
+    use glium::{glutin, Surface};
+
     let events_loop = glutin::event_loop::EventLoop::new();
 
     let wb = glutin::window::WindowBuilder::new();
     let cb = glutin::ContextBuilder::new();
     let display = glium::Display::new(wb, cb, &events_loop).unwrap();
 
-    events_loop.run(move |ev, _ , control_flow| {
-
+    events_loop.run(move |ev, _, control_flow| {
         let mut target = display.draw();
         target.clear_color(0.0, 0.0, 1.0, 1.0);
         target.finish().unwrap();
 
-        let frm_time = std::time::Instant::now() +
-            std::time::Duration::from_nanos(16_666_667);
+        let frm_time = std::time::Instant::now() + std::time::Duration::from_nanos(16_666_667);
         *control_flow = glutin::event_loop::ControlFlow::WaitUntil(frm_time);
-
 
         if let glutin::event::Event::WindowEvent { event, .. } = ev {
             if event == glutin::event::WindowEvent::CloseRequested {
@@ -42,7 +38,7 @@ fn main() {
     //     target.clear_color(0.0, 0.0, 1.0, 1.0);
     //     target.finish().unwrap();
     //
-    //     let next_frame_time = std::time::Instant::now() + 
+    //     let next_frame_time = std::time::Instant::now() +
     //         std::time::Duration::from_nanos(16_666_667);
     //
     //     *control_flow = glium::glutin::event_loop::ControlFlow::WaitUntil(next_frame_time);
